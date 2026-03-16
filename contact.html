@@ -5,12 +5,302 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Contact Us | f software</title>
+    <style>
+        /* Contact page specific styles */
+        .contact-page {
+            padding: 150px 0 100px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contact-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-header h1 span {
+            color: var(--primary-green);
+        }
+        
+        .contact-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        /* Contact Info Cards */
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-green);
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .info-icon svg {
+            width: 25px;
+            height: 25px;
+            fill: var(--primary-green);
+        }
+        
+        .info-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-black);
+        }
+        
+        .info-content p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        .info-content a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .info-content a:hover {
+            color: var(--primary-green);
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        
+        .contact-form-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-black);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-black);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f9f9f9;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+            outline: none;
+            background: white;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-submit:hover {
+            background: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Map Section */
+        .map-section {
+            margin-top: 60px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-placeholder {
+            background: #f0f0f0;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .map-overlay {
+            background: rgba(46, 204, 113, 0.9);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 80px;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-item h4 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .faq-item p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        /* Success Message */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-page {
+                padding: 120px 0 60px;
+            }
+            
+            .contact-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-placeholder {
+                height: 300px;
+            }
+            
+            .map-overlay {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
+                <div class="logo">
+                    <span class="f">f</span><span class="soft">softwar</span><span class="e">e</span>
+                </div>
                 <div class="menu-toggle" id="mobile-menu">☰</div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -23,20 +313,256 @@
         </div>
     </header>
 
-    <section>
-        <div class="container" style="max-width: 600px;">
-            <h2 style="text-align: center; margin-bottom: 30px;">Let's Talk</h2>
-            <form>
-                <input type="text" placeholder="Name" style="width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
-                <input type="email" placeholder="Email" style="width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
-                <textarea placeholder="Tell us about your project" rows="5" style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px;"></textarea>
-                <button type="submit" class="btn btn-green" style="width: 100%; margin-top: 20px;">Send Message</button>
-            </form>
-        </div>
-    </section>
+    <main>
+        <section class="contact-page">
+            <div class="container">
+                <!-- Header Section -->
+                <div class="contact-header reveal">
+                    <h1>Get In <span>Touch</span></h1>
+                    <p>Have a project in mind? We'd love to hear from you. Let's discuss how we can help bring your ideas to life.</p>
+                </div>
 
-    <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+                <!-- Contact Grid -->
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info reveal">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:hello@fsoftware.com">hello@fsoftware.com</a></p>
+                                <p><a href="mailto:support@fsoftware.com">support@fsoftware.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.3-1.1-.5-2.3-.5-3.5 0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1zM19 12h2c0-4.9-4.1-9-9-9v2c3.9 0 7 3.1 7 7zm-4 0h2c0-2.8-2.2-5-5-5v2c1.7 0 3 1.3 3 3z"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Call Us</h3>
+                                <p><a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+                                <p><a href="tel:+15557654321">+1 (555) 765-4321</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Visit Us</h3>
+                                <p>123 Tech Street<br>San Francisco, CA 94105<br>United States</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Business Hours</h3>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                <p>Saturday - Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-container reveal">
+                        <h2>Send us a Message</h2>
+                        
+                        <!-- Success Message -->
+                        <div class="success-message" id="successMessage">
+                            Thank you for your message! We'll get back to you soon.
+                        </div>
+
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" placeholder="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" placeholder="Doe" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" placeholder="john@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="service">Service Interested In</label>
+                                <select id="service">
+                                    <option value="">Select a service</option>
+                                    <option value="web">Web Development</option>
+                                    <option value="mobile">Mobile App Development</option>
+                                    <option value="design">UI/UX Design</option>
+                                    <option value="cloud">Cloud Solutions</option>
+                                    <option value="consulting">IT Consulting</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Project Details *</label>
+                                <textarea id="message" placeholder="Tell us about your project, goals, and requirements..." required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="budget">Budget Range</label>
+                                <select id="budget">
+                                    <option value="">Select budget range</option>
+                                    <option value="<10k">Less than $10,000</option>
+                                    <option value="10k-25k">$10,000 - $25,000</option>
+                                    <option value="25k-50k">$25,000 - $50,000</option>
+                                    <option value="50k-100k">$50,000 - $100,000</option>
+                                    <option value=">100k">$100,000+</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="map-section reveal">
+                    <div class="map-placeholder">
+                        <div class="map-overlay">
+                            📍 f software - San Francisco Office
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h2 class="section-title reveal">Frequently Asked Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-item reveal">
+                            <h4>How quickly do you respond to inquiries?</h4>
+                            <p>We typically respond within 24 hours during business days. For urgent matters, we recommend giving us a call.</p>
+                        </div>
+                        <div class="faq-item reveal">
+                            <h4>Do you work with international clients?</h4>
+                            <p>Absolutely! We have clients worldwide and are experienced in remote collaboration across different time zones.</p>
+                        </div>
+                        <div class="faq-item reveal">
+                            <h4>What information should I provide?</h4>
+                            <p>Share your project idea, goals, timeline, and any specific requirements. The more details, the better we can understand your needs.</p>
+                        </div>
+                        <div class="faq-item reveal">
+                            <h4>Do you offer free consultations?</h4>
+                            <p>Yes, we offer a free 30-minute consultation to discuss your project and see if we're a good fit for each other.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <span class="f">f</span><span style="color: white;">softwar</span><span class="e">e</span>
+                    </div>
+                    <p style="color: #888;">Innovating through code, delivering excellence since 2024.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul style="color: #888;">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p style="color: #888;">
+                        LinkedIn<br>
+                        Twitter<br>
+                        GitHub<br>
+                        Dribbble
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; background: #333; border: none; color: white; margin-bottom: 10px; border-radius: 5px;">
+                    <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 f software. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Contact Form Validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validation
+            if (firstName.length < 2) {
+                alert("Please enter a valid first name.");
+                return;
+            }
+            if (lastName.length < 2) {
+                alert("Please enter a valid last name.");
+                return;
+            }
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            if (message.length < 10) {
+                alert("Message should be at least 10 characters long.");
+                return;
+            }
+
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+            }, 5000);
+            
+            // Scroll to success message
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
 </body>
 </html>

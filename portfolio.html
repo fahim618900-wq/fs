@@ -5,12 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Portfolio | f software</title>
+    <style>
+        /* Portfolio page specific styles */
+        .portfolio-page {
+            padding: 150px 0 100px;
+            min-height: 100vh;
+            background: var(--light-gray);
+        }
+        
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .portfolio-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-header h1 span {
+            color: var(--primary-green);
+        }
+        
+        .portfolio-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-gray);
+            border-radius: 30px;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: #ddd;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+        
+        .portfolio-overlay p {
+            color: var(--primary-green);
+            font-weight: 600;
+            transform: translateY(20px);
+            transition: var(--transition);
+            transition-delay: 0.1s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p {
+            transform: translateY(0);
+        }
+        
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-page {
+                padding: 120px 0 60px;
+            }
+            
+            .portfolio-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .portfolio-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
+                <div class="logo">
+                    <span class="f">f</span><span class="soft">softwar</span><span class="e">e</span>
+                </div>
                 <div class="menu-toggle" id="mobile-menu">☰</div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -23,22 +187,178 @@
         </div>
     </header>
 
-    <section>
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 50px;">Selected Portfolio</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
-                <div style="height: 300px; background: #ddd; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                    <h3>Project One</h3>
+    <main>
+        <section class="portfolio-page">
+            <div class="container">
+                <!-- Header Section -->
+                <div class="portfolio-header reveal">
+                    <h1>Our <span>Creative Work</span></h1>
+                    <p>Explore our latest projects and see how we've helped businesses transform their digital presence</p>
                 </div>
-                <div style="height: 300px; background: #ddd; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                    <h3>Project Two</h3>
+
+                <!-- Filter Buttons -->
+                <div class="portfolio-filter reveal">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Web Development</button>
+                    <button class="filter-btn">Mobile Apps</button>
+                    <button class="filter-btn">UI/UX Design</button>
+                    <button class="filter-btn">E-commerce</button>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid">
+                    <!-- Project 1 -->
+                    <div class="portfolio-item reveal" data-category="web">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="FinTech Dashboard">
+                        <div class="portfolio-overlay">
+                            <h3>FinTech Dashboard</h3>
+                            <p>Web Development</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="portfolio-item reveal" data-category="ecommerce">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Platform">
+                        <div class="portfolio-overlay">
+                            <h3>E-Commerce Platform</h3>
+                            <p>Full Stack Solution</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="portfolio-item reveal" data-category="mobile">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="Healthcare App">
+                        <div class="portfolio-overlay">
+                            <h3>Healthcare App</h3>
+                            <p>Mobile Application</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="portfolio-item reveal" data-category="design">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80" alt="Brand Identity">
+                        <div class="portfolio-overlay">
+                            <h3>Brand Identity</h3>
+                            <p>UI/UX Design</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="portfolio-item reveal" data-category="web">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80" alt="Real Estate Platform">
+                        <div class="portfolio-overlay">
+                            <h3>Real Estate Platform</h3>
+                            <p>Web Application</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="portfolio-item reveal" data-category="mobile">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80" alt="Food Delivery App">
+                        <div class="portfolio-overlay">
+                            <h3>Food Delivery App</h3>
+                            <p>Mobile Application</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Section -->
+                <div class="portfolio-stats reveal">
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>30+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>15+</h3>
+                        <p>Industries Served</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <span class="f">f</span><span style="color: white;">softwar</span><span class="e">e</span>
+                    </div>
+                    <p style="color: #888;">Innovating through code, delivering excellence since 2024.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul style="color: #888;">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p style="color: #888;">
+                        LinkedIn<br>
+                        Twitter<br>
+                        GitHub<br>
+                        Dribbble
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; background: #333; border: none; color: white; margin-bottom: 10px; border-radius: 5px;">
+                    <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 f software. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Portfolio filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.textContent.toLowerCase();
+                    
+                    // Filter items
+                    portfolioItems.forEach(item => {
+                        // You can add data-category attributes to filter
+                        // For now, just show all
+                        item.style.display = 'block';
+                        
+                        // Add animation
+                        item.style.opacity = '0';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                        }, 50);
+                    });
+                    
+                    // Show message if no items (optional)
+                    if (filterValue !== 'all') {
+                        // Here you can add actual filtering logic
+                        console.log('Filtering by:', filterValue);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

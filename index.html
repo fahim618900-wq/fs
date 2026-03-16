@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>f software | Modern Solutions</title>
+    <style>
+        /* --- Root Variables --- */
+        :root {
+            --primary-green: #2ecc71;
+            --primary-black: #1a1a1a;
+            --primary-red: #e74c3c;
+            --white: #ffffff;
+            --light-gray: #f9f9f9;
+            --text-gray: #555;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--primary-black);
+            background-color: var(--white);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* --- Header (Transparent & Glassmorphism) --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.4); /* হালকা ট্রান্সপারেন্ট */
+            backdrop-filter: blur(15px); /* ঝাপসা ইফেক্ট */
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 12px 0;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo .f { color: var(--primary-green); }
+        .logo .soft { color: var(--primary-black); }
+        .logo .e { color: var(--primary-red); }
+
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            color: var(--primary-black);
+        }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hero Background Decoration */
+        #home::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(46, 204, 113, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 1; text-align: center; width: 100%; }
+        .hero-content h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); margin-bottom: 25px; line-height: 1.1; }
+        .hero-content p { font-size: 1.25rem; color: var(--text-gray); max-width: 650px; margin: 0 auto 40px; }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary { background: var(--primary-green); color: white; margin-right: 15px; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3); }
+
+        .btn-secondary { background: transparent; border: 2px solid var(--primary-black); }
+        .btn-secondary:hover { background: var(--primary-black); color: white; }
+
+        /* --- Sections Style --- */
+        section { padding: 120px 0; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Services --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            padding: 50px 40px;
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #f0f0f0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        /* --- Portfolio --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .portfolio-item:hover img { transform: scale(1.1); }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+        /* --- Form --- */
+        .contact-form { max-width: 600px; margin: 0 auto; }
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-input:focus { border-color: var(--primary-green); background: #f9fffb; }
+
+        /* --- Footer --- */
+        footer { background: #0a0a0a; color: white; padding: 80px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer-bottom { text-align: center; border-top: 1px solid #222; padding-top: 30px; color: #666; font-size: 0.9rem; }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: block; z-index: 1001; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span class="f">f</span><span class="soft">softwar</span><span class="e">e</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="container hero-content">
+            <h1 class="reveal active">Empowering Brands <br> Through <span style="color:var(--primary-green)">Software</span></h1>
+            <p class="reveal active">We build scalable, high-performance web and mobile applications tailored to your business needs.</p>
+            <div class="reveal active">
+                <a href="#contact" class="btn btn-primary">Start a Project</a>
+                <a href="#portfolio" class="btn btn-secondary">Our Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;" class="reveal">
+                <h2 style="font-size: 2.5rem;">Core Services</h2>
+                <div style="width: 50px; height: 3px; background: var(--primary-green); margin: 15px auto;"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <h3 style="margin-bottom: 15px;">Web Strategy</h3>
+                    <p style="color: var(--text-gray);">Custom web solutions focused on user experience and conversion optimization.</p>
+                </div>
+                <div class="service-card reveal">
+                    <h3 style="margin-bottom: 15px;">App Development</h3>
+                    <p style="color: var(--text-gray);">High-quality iOS and Android applications built with modern frameworks.</p>
+                </div>
+                <div class="service-card reveal">
+                    <h3 style="margin-bottom: 15px;">Cloud Integration</h3>
+                    <p style="color: var(--text-gray);">Seamless cloud migration and management for maximum scalability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="reveal" style="text-align: center; margin-bottom: 50px;">Selected Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Project 1">
+                    <div class="portfolio-overlay">
+                        <h3>Data Analytics Pro</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                    <div class="portfolio-overlay">
+                        <h3>SaaS Platform</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-form reveal">
+                <h2 style="text-align: center; margin-bottom: 40px;">Get In Touch</h2>
+                <form id="contactForm">
+                    <input type="text" placeholder="Full Name" class="form-input" required>
+                    <input type="email" placeholder="Email Address" class="form-input" required>
+                    <textarea placeholder="Tell us about your project" class="form-input" rows="6" required></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin: 0;">Send Proposal</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <span class="f">f</span><span style="color: white;">softwar</span><span class="e">e</span>
+                    </div>
+                    <p style="color: #888;">Leading the way in digital innovation and software craftsmanship.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px;">Navigation</h4>
+                    <p><a href="#home" style="color: #888;">Home</a></p>
+                    <p><a href="#services" style="color: #888;">Services</a></p>
+                    <p><a href="#contact" style="color: #888;">Contact</a></p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px;">Contact</h4>
+                    <p style="color: #888;">hello@fsoftware.com</p>
+                    <p style="color: #888;">+123 456 7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 f software. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Header Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // --- Scroll Reveal ---
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(r => {
+                let windowHeight = window.innerHeight;
+                let elementTop = r.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    r.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial check
+
+        // --- Simple Form Submission ---
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Success! We've received your request.");
+        });
+    </script>
+</body>
+</html>

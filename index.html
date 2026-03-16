@@ -3,36 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>f software | Home</title>
+    <title>f software | Innovative Solutions</title>
+    <style>
+        /* --- Root Variables --- */
+        :root {
+            --primary-green: #2ecc71;
+            --primary-black: #1a1a1a;
+            --primary-red: #e74c3c;
+            --white: #ffffff;
+            --light-gray: #f9f9f9;
+            --text-gray: #555;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--primary-black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary { background: var(--primary-green); color: white; }
+        .btn-primary:hover { background: #27ae60; transform: translateY(-3px); box-shadow: var(--shadow); }
+
+        .btn-secondary { background: transparent; border: 2px solid var(--primary-black); color: var(--primary-black); }
+        .btn-secondary:hover { background: var(--primary-black); color: white; }
+
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span.f { color: var(--primary-green); }
+        .logo span.soft { color: var(--primary-black); }
+        .logo span.e { color: var(--primary-red); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            background: radial-gradient(circle at top right, #f0fff4, #ffffff);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-inline: auto;
+        }
+
+        .hero-btns { display: flex; gap: 15px; justify-content: center; }
+
+        /* --- Services --- */
+        section { padding: 100px 0; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 40px;
+            background: var(--white);
+            border-radius: 15px;
+            border: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-green);
+        }
+
+        .service-card svg { width: 50px; height: 50px; margin-bottom: 20px; fill: var(--primary-green); }
+
+        /* --- Portfolio --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background: #ddd;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 26, 26, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+        /* --- Contact Form --- */
+        .contact-container { max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: var(--transition);
+        }
+        input:focus, textarea:focus { border-color: var(--primary-green); box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1); }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary-black);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h4 { margin-bottom: 20px; color: var(--primary-green); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 0.9rem; }
+
+        /* --- Animations --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: white;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                padding: 40px;
+                box-shadow: var(--shadow);
+                transition: 0.4s;
+            }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: block; }
+            .hero-btns { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <div class="container">
             <nav>
-                <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
-                <div class="menu-toggle" id="mobile-menu">☰</div>
+                <div class="logo">
+                    <span class="f">f</span><span class="soft">softwar</span><span class="e">e</span>
+                </div>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#home">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="portfolio.html">Portfolio</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
             </nav>
         </div>
     </header>
 
-    <section id="home" style="display: flex; align-items: center; background: #f9fffb; justify-content: center; text-align: center;">
-        <div class="container">
-            <h1>Innovative Software for <br>Modern Businesses</h1>
-            <p style="margin: 20px 0 30px; color: var(--text-gray);">We build future-ready digital products that drive growth.</p>
-            <a href="contact.html" class="btn btn-green">Get Started</a>
+    <section id="home">
+        <div class="container hero-content">
+            <h1 class="reveal">Build the Future with <br><span style="color:var(--primary-green)">Code</span> & Strategy</h1>
+            <p class="reveal">We design and develop high-performance software solutions for forward-thinking businesses. Let’s turn your vision into digital reality.</p>
+            <div class="hero-btns reveal">
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <a href="#portfolio" class="btn btn-secondary">View Portfolio</a>
+            </div>
         </div>
     </section>
 
-    <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+    <section id="about">
+        <div class="container">
+            <div class="services-grid" style="align-items: center;">
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="About us" style="width:100%; border-radius: 20px;">
+                </div>
+                <div class="reveal">
+                    <h2>Who We Are</h2>
+                    <p style="margin: 20px 0; color: var(--text-gray);">At <strong>f software</strong>, we believe in the power of simple, functional, and beautiful technology. Our team of experts works closely with you to solve complex problems through innovative software development.</p>
+                    <button class="btn btn-secondary">Our Story</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <section id="services" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our Expertise</h2>
+                <p>Tailored solutions for your digital growth</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <svg viewBox="0 0 24 24"><path d="M20,18c1.1,0,1.99-0.9,1.99-2L22,6c0-1.1-0.9-2-2-2H4C2.9,0,2,0.9,2,2v12c0,1.1,0.9,2,2,2H0v2h24v-2H20z M4,6h16v10H4V6z"/></svg>
+                    <h3>Web Development</h3>
+                    <p>Modern, responsive, and blazing-fast websites built with the latest technologies.</p>
+                </div>
+                <div class="service-card reveal">
+                    <svg viewBox="0 0 24 24"><path d="M17,1.01L7,1C5.9,1,5,1.9,5,3v18c0,1.1,0.9,2,2,2h10c1.1,0,2-0.9,2-2V3C19,1.9,18.1,1.01,17,1.01z M17,19H7V5h10V19z"/></svg>
+                    <h3>Mobile Apps</h3>
+                    <p>Cross-platform mobile applications that provide seamless user experiences.</p>
+                </div>
+                <div class="service-card reveal">
+                    <svg viewBox="0 0 24 24"><path d="M12,1L3,5v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V5L12,1z M12,11.99h7c-0.53,4.12-3.28,7.79-7,8.94V12H5V6.3l7-3.11V11.99z"/></svg>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and security management for your business data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=60" alt="Work" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="portfolio-overlay">
+                        <h3>FinTech Dashboard</h3>
+                        <p>UI/UX Design & Dev</p>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=60" alt="Work" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="portfolio-overlay">
+                        <h3>E-Commerce Engine</h3>
+                        <p>Full Stack Solution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Let's Connect</h2>
+                <p>Have a project in mind? We'd love to hear from you.</p>
+            </div>
+            <div class="contact-container reveal">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="5" placeholder="Tell us about your project" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <span class="f">f</span><span style="color: white;">softwar</span><span class="e">e</span>
+                    </div>
+                    <p style="color: #888;">Innovating through code, delivering excellence since 2024.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links</h4>
+                    <ul style="color: #888;">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p style="color: #888;">LinkedIn / Twitter / GitHub</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <input type="text" placeholder="Your Email" style="background: #333; border: none; color: white; margin-bottom: 10px;">
+                    <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 f software. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.textContent = '☰';
+            });
+        });
+
+        // --- Scroll Reveal Animation ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal(); // Run once on load
+
+        // --- Form Validation ---
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (name.length < 2) {
+                alert("Please enter a valid name.");
+                return;
+            }
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            if (message.length < 10) {
+                alert("Message should be at least 10 characters long.");
+                return;
+            }
+
+            alert("Thank you, " + name + "! Your message has been sent successfully.");
+            this.reset();
+        });
+    </script>
 </body>
 </html>

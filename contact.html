@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Contact Us | f software</title>
 </head>
@@ -9,6 +11,7 @@
         <div class="container">
             <nav>
                 <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -22,15 +25,18 @@
 
     <section>
         <div class="container" style="max-width: 600px;">
-            <h2>Send a Message</h2>
-            <form style="margin-top: 30px;">
-                <input type="text" placeholder="Name" style="width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd;">
-                <textarea placeholder="Message" rows="5" style="width: 100%; padding: 15px; border: 1px solid #ddd;"></textarea>
-                <button class="btn btn-green" style="margin-top: 15px; width: 100%;">Submit</button>
+            <h2 style="text-align: center; margin-bottom: 30px;">Let's Talk</h2>
+            <form>
+                <input type="text" placeholder="Name" style="width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
+                <input type="email" placeholder="Email" style="width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
+                <textarea placeholder="Tell us about your project" rows="5" style="width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px;"></textarea>
+                <button type="submit" class="btn btn-green" style="width: 100%; margin-top: 20px;">Send Message</button>
             </form>
         </div>
     </section>
 
     <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

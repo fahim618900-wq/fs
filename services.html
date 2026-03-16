@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Our Services | f software</title>
-    <style>
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-        .card { padding: 30px; border: 1px solid #eee; border-radius: 10px; }
-    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
                 <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -26,15 +25,26 @@
 
     <section>
         <div class="container">
-            <h2>What We Do</h2>
-            <div class="grid">
-                <div class="card"><h3>Web Development</h3><p>Custom websites built with speed.</p></div>
-                <div class="card"><h3>Mobile Apps</h3><p>Native & Cross-platform apps.</p></div>
-                <div class="card"><h3>UI/UX Design</h3><p>Modern and clean interfaces.</p></div>
+            <h2 style="text-align: center; margin-bottom: 40px;">What We Do</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="padding: 40px; background: #fff; border: 1px solid #eee; border-radius: 15px;">
+                    <h3>Web Development</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Custom websites built with speed and precision.</p>
+                </div>
+                <div style="padding: 40px; background: #fff; border: 1px solid #eee; border-radius: 15px;">
+                    <h3>Mobile Apps</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Native and cross-platform high-performance apps.</p>
+                </div>
+                <div style="padding: 40px; background: #fff; border: 1px solid #eee; border-radius: 15px;">
+                    <h3>UI/UX Design</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Modern, clean and intuitive user interfaces.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

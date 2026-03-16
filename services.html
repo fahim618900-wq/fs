@@ -5,12 +5,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Our Services | f software</title>
+    <style>
+        /* Services page specific styles */
+        .services-page {
+            padding: 150px 0 100px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f9f9f9 100%);
+        }
+        
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .services-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .services-header h1 span {
+            color: var(--primary-green);
+        }
+        
+        .services-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-green);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .service-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: var(--primary-green);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-black);
+        }
+        
+        .service-card p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .service-features li {
+            margin-bottom: 10px;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .process-section {
+            background: white;
+            padding: 80px 0;
+            margin-top: 50px;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .process-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 30px;
+            font-size: 2rem;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .process-step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .process-step p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-section .btn {
+            background: white;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            padding: 15px 40px;
+        }
+        
+        .cta-section .btn:hover {
+            background: var(--primary-black);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .services-page {
+                padding: 120px 0 60px;
+            }
+            
+            .services-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
+                <div class="logo">
+                    <span class="f">f</span><span class="soft">softwar</span><span class="e">e</span>
+                </div>
                 <div class="menu-toggle" id="mobile-menu">☰</div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -23,27 +253,197 @@
         </div>
     </header>
 
-    <section>
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px;">What We Do</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                <div style="padding: 40px; background: #fff; border: 1px solid #eee; border-radius: 15px;">
-                    <h3>Web Development</h3>
-                    <p style="color: var(--text-gray); margin-top: 10px;">Custom websites built with speed and precision.</p>
+    <main>
+        <section class="services-page">
+            <div class="container">
+                <!-- Header Section -->
+                <div class="services-header reveal">
+                    <h1>Our <span>Services</span></h1>
+                    <p>We offer comprehensive digital solutions to help your business grow and succeed in the modern world</p>
                 </div>
-                <div style="padding: 40px; background: #fff; border: 1px solid #eee; border-radius: 15px;">
-                    <h3>Mobile Apps</h3>
-                    <p style="color: var(--text-gray); margin-top: 10px;">Native and cross-platform high-performance apps.</p>
+
+                <!-- Services Grid -->
+                <div class="services-grid">
+                    <!-- Web Development -->
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20,18c1.1,0,1.99-0.9,1.99-2L22,6c0-1.1-0.9-2-2-2H4C2.9,0,2,0.9,2,2v12c0,1.1,0.9,2,2,2H0v2h24v-2H20z M4,6h16v10H4V6z"/>
+                            </svg>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Custom websites and web applications built with modern technologies for optimal performance and user experience.</p>
+                        <ul class="service-features">
+                            <li>Responsive Design</li>
+                            <li>E-commerce Solutions</li>
+                            <li>CMS Development</li>
+                            <li>API Integration</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Apps -->
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17,1.01L7,1C5.9,1,5,1.9,5,3v18c0,1.1,0.9,2,2,2h10c1.1,0,2-0.9,2-2V3C19,1.9,18.1,1.01,17,1.01z M17,19H7V5h10V19z"/>
+                            </svg>
+                        </div>
+                        <h3>Mobile Apps</h3>
+                        <p>Native and cross-platform mobile applications that deliver seamless experiences across all devices.</p>
+                        <ul class="service-features">
+                            <li>iOS & Android</li>
+                            <li>React Native</li>
+                            <li>Flutter Development</li>
+                            <li>App Store Optimization</li>
+                        </ul>
+                    </div>
+
+                    <!-- UI/UX Design -->
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z M12,6c-3.31,0-6,2.69-6,6s2.69,6,6,6s6-2.69,6-6S15.31,6,12,6z"/>
+                            </svg>
+                        </div>
+                        <h3>UI/UX Design</h3>
+                        <p>Beautiful, intuitive interfaces designed with user psychology and modern design principles.</p>
+                        <ul class="service-features">
+                            <li>User Research</li>
+                            <li>Wireframing</li>
+                            <li>Prototyping</li>
+                            <li>Usability Testing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Cloud Solutions -->
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12,1L3,5v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V5L12,1z M12,11.99h7c-0.53,4.12-3.28,7.79-7,8.94V12H5V6.3l7-3.11V11.99z"/>
+                            </svg>
+                        </div>
+                        <h3>Cloud Solutions</h3>
+                        <p>Scalable cloud infrastructure and deployment strategies for optimal performance and reliability.</p>
+                        <ul class="service-features">
+                            <li>AWS/Azure/GCP</li>
+                            <li>DevOps & CI/CD</li>
+                            <li>Microservices</li>
+                            <li>Serverless Architecture</li>
+                        </ul>
+                    </div>
+
+                    <!-- Digital Marketing -->
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20,4H4C2.9,4,2,4.9,2,6v12c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"/>
+                            </svg>
+                        </div>
+                        <h3>Digital Marketing</h3>
+                        <p>Strategic digital marketing solutions to increase your online presence and drive growth.</p>
+                        <ul class="service-features">
+                            <li>SEO Optimization</li>
+                            <li>Social Media</li>
+                            <li>Content Strategy</li>
+                            <li>Analytics & Reporting</li>
+                        </ul>
+                    </div>
+
+                    <!-- IT Consulting -->
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21,6h-2v2h-2V6h-2V4h2V2h2v2h2v2zm-10,3c1.66,0,3-1.34,3-3s-1.34-3-3-3s-3,1.34-3,3S9.34,9,11,9z M11,13c-2.33,0-7,1.17-7,3.5V19h14v-2.5C18,14.17,13.33,13,11,13z"/>
+                            </svg>
+                        </div>
+                        <h3>IT Consulting</h3>
+                        <p>Expert technology consulting to help you make informed decisions and optimize your IT infrastructure.</p>
+                        <ul class="service-features">
+                            <li>Technology Audit</li>
+                            <li>Digital Strategy</li>
+                            <li>System Architecture</li>
+                            <li>Security Assessment</li>
+                        </ul>
+                    </div>
                 </div>
-                <div style="padding: 40px; background: #fff; border: 1px solid #eee; border-radius: 15px;">
-                    <h3>UI/UX Design</h3>
-                    <p style="color: var(--text-gray); margin-top: 10px;">Modern, clean and intuitive user interfaces.</p>
+
+                <!-- Process Section -->
+                <div class="process-section reveal">
+                    <div class="container">
+                        <h2 class="section-title">How We Work</h2>
+                        <div class="process-grid">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h4>Discovery</h4>
+                                <p>We analyze your requirements and goals</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h4>Planning</h4>
+                                <p>Create detailed roadmap and architecture</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h4>Development</h4>
+                                <p>Build and test your solution</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <h4>Delivery</h4>
+                                <p>Deploy and provide ongoing support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="cta-section reveal">
+                    <h2>Ready to Start Your Project?</h2>
+                    <p>Let's discuss how we can help bring your ideas to life</p>
+                    <a href="contact.html" class="btn">Get in Touch</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <span class="f">f</span><span style="color: white;">softwar</span><span class="e">e</span>
+                    </div>
+                    <p style="color: #888;">Innovating through code, delivering excellence since 2024.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul style="color: #888;">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul style="color: #888;">
+                        <li><a href="services.html">Web Development</a></li>
+                        <li><a href="services.html">Mobile Apps</a></li>
+                        <li><a href="services.html">UI/UX Design</a></li>
+                        <li><a href="services.html">Cloud Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; background: #333; border: none; color: white; margin-bottom: 10px; border-radius: 5px;">
+                    <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 f software. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

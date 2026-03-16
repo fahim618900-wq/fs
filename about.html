@@ -5,12 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>About Us | f software</title>
+    <style>
+        /* About page specific styles */
+        .about-section {
+            padding: 150px 0 100px;
+            min-height: 60vh;
+            background: var(--light-gray);
+        }
+        
+        .about-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-black);
+        }
+        
+        .about-section h2 span {
+            color: var(--primary-green);
+        }
+        
+        .about-section p {
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        .about-image {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .values-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: var(--light-gray);
+            transition: var(--transition);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .value-card h3 {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .value-card p {
+            color: var(--text-gray);
+        }
+        
+        .team-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="logo"><span class="f">f</span> softwar<span class="e">e</span></div>
+                <div class="logo">
+                    <span class="f">f</span><span class="soft">softwar</span><span class="e">e</span>
+                </div>
                 <div class="menu-toggle" id="mobile-menu">☰</div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -23,14 +127,81 @@
         </div>
     </header>
 
-    <section>
-        <div class="container">
-            <h2>Our Story</h2>
-            <p style="margin-top: 20px; font-size: 1.1rem; color: var(--text-gray);">f software started with a mission to simplify technology. We are a team of passionate developers, creative designers, and expert strategists committed to delivering high-quality software solutions.</p>
-        </div>
-    </section>
+    <main>
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="container">
+                <h2 class="reveal">About <span>f software</span></h2>
+                <p class="reveal">f software started with a mission to simplify technology. We are a team of passionate developers, creative designers, and expert strategists committed to delivering high-quality software solutions.</p>
+                
+                <div class="about-grid">
+                    <div class="reveal">
+                        <h3>Our Mission</h3>
+                        <p>We believe in the power of simple, functional, and beautiful technology. Our team works closely with you to solve complex problems through innovative software development.</p>
+                        <p>What sets us apart is our commitment to quality, transparency, and continuous learning. We stay ahead of technology trends so our clients don't have to.</p>
+                    </div>
+                    <div class="about-image reveal">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Our team working together">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer><p>&copy; 2026 f software. All rights reserved.</p></footer>
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title reveal">Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card reveal">
+                        <h3>100+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <h3>50+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="value-card reveal">
+                        <h3>24/7</h3>
+                        <p>Support Available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <span class="f">f</span><span style="color: white;">softwar</span><span class="e">e</span>
+                    </div>
+                    <p style="color: #888;">Innovating through code, delivering excellence since 2024.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul style="color: #888;">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p style="color: #888;">LinkedIn<br>Twitter<br>GitHub</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; background: #333; border: none; color: white; margin-bottom: 10px; border-radius: 5px;">
+                    <button class="btn btn-primary" style="padding: 8px 15px; font-size: 14px;">Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 f software. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
